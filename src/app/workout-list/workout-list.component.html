@@ -1,0 +1,28 @@
+
+<div>
+    <input type="text" [(ngModel)]="searchName" placeholder="Search by User Name">
+    <select [(ngModel)]="filterType">
+      <option value="">Filter by Workout Type</option>
+      <!-- Add options dynamically if needed -->
+    </select>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>User Name</th>
+          <th>Workout Type</th>
+          <th>Workout Minutes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let workout of filteredWorkouts | paginate: { itemsPerPage: pageSize, currentPage: currentPage, id: 'pagination-id' }">
+          <td>{{ workout.userName }}</td>
+          <td>{{ workout.workoutType }}</td>
+          <td>{{ workout.workoutMinutes }}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <pagination-controls (pageChange)="pageChanged($event)" id="pagination-id"></pagination-controls>
+  </div>
+  
